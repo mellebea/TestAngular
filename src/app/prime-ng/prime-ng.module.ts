@@ -3,7 +3,7 @@ import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
     TableModule,
     MenubarModule,
     ButtonModule,
+    ReactiveFormsModule,
     
   ]
 })

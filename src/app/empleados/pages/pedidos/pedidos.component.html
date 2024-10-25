@@ -1,1 +1,41 @@
-<p>pedidos works!</p>
+<div class="p-grid p-fluid">
+  <div class="p-col-12 p-md-6 p-lg-4">
+    <h2 class="p-text-center">Hacer un Pedido de Prenda</h2>
+    
+    <form (ngSubmit)="insertarPedido()">
+
+      <div class="p-field">
+        <label for="id" class="p-mb-6">Empleado ID</label>
+        <input pInputText id="idEmpleado" [(ngModel)]="pedido.EmpleadoId" name="idEmpleado" required />
+        <small *ngIf="pedido.EmpleadoId" class="p-error"></small>
+      </div>
+
+      <div class="p-field">
+        <label for="id" class="p-mb-6">Fecha Pedido</label>
+        <input pInputText id="FechaPedido" [(ngModel)]="pedido.FechaPedido" name="FechaPedido" required />
+        <small *ngIf="pedido.FechaPedido" class="p-error"></small>
+      </div>
+
+      <div class="p-field">
+        <label for="id" class="p-mb-6">Id Prenda</label>
+        <input pInputText id="IdPrenda" [(ngModel)]="pedido.IdPrenda" name="IdPrenda" required />
+        <small *ngIf="pedido.IdPrenda" class="p-error"></small>
+      </div>
+
+      <div class="p-field">
+        <label for="id" class="p-mb-6">Talle</label>
+        <input pInputText id="talle" [(ngModel)]="pedido.talle" name="talle" required />
+        <small *ngIf="pedido.talle" class="p-error"></small>
+      </div>
+
+      <div class="p-field">
+        <label for="id" class="p-mb-6">Cantidad</label>
+        <input pInputText id="cantidad" [(ngModel)]="pedido.cantidad" name="cantidad" required />
+        <small *ngIf="pedido.cantidad" class="p-error"></small>
+      </div>
+      <div class="p-field p-mt-2">
+        <button pButton type="submit" label="Guardar" [disabled]="!pedido.EmpleadoId || !pedido.FechaPedido || !pedido.IdPrenda || !pedido.talle || !pedido.cantidad"></button>
+      </div>
+    </form>
+  </div>
+</div>
