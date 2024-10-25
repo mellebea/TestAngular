@@ -1,0 +1,23 @@
+<p-table 
+    [value]="ListaEmpleadoPrendaPedido" 
+    styleClass="p-datatable-striped" 
+    [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Fecha de Pedido</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cantidad</th>
+                <th>Nombre de Prenda</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>{{item.fechaPedido | date:'dd-MM-YYYY'}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.apellido}}</td>
+                <td>{{item.cantidad}}</td>
+                <td>{{item.nombrePrenda}}</td>
+            </tr>
+        </ng-template>
+</p-table>

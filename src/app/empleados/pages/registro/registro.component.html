@@ -1,0 +1,39 @@
+<div class="p-grid p-fluid">
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <div class="card p-p-3">
+        <h2 class="p-text-center">Registrar Empleado</h2>
+  
+        <form (ngSubmit)="guardarEmpleado()">
+          <div class="p-field">
+            <label for="nombre">Nombre</label>
+            <input pInputText id="nombre" [(ngModel)]="empleado.nombre" name="nombre" required />
+            <small *ngIf="empleado.nombre?.length === 0" class="p-error">Nombre es requerido.</small>
+          </div>
+  
+          <div class="p-field">
+            <label for="apellido">Apellido</label>
+            <input pInputText id="apellido" [(ngModel)]="empleado.apellido" name="apellido" required />
+            <small *ngIf="empleado.apellido?.length === 0" class="p-error">Apellido es requerido.</small>
+          </div>
+  
+          <div class="p-field">
+            <label for="email">Email</label>
+            <input pInputText id="email" [(ngModel)]="empleado.email" name="email" required type="email" />
+            <small *ngIf="empleado.email?.length === 0" class="p-error">Email es requerido.</small>
+            <small *ngIf="!empleado.email?.includes('@')" class="p-error">Email no es válido.</small>
+          </div>
+  
+          <div class="p-field">
+            <label for="talle">Talle Predeterminado</label>
+            <input pInputText id="talle" [(ngModel)]="empleado.tallePredeterminado" name="talle" required />
+            <small *ngIf="empleado.tallePredeterminado?.length === 0" class="p-error">Talle es requerido.</small>
+          </div>
+  
+          <div class="p-field p-mt-2">
+            <button pButton type="submit" label="Guardar" [disabled]="!empleado.nombre || !empleado.apellido || !empleado.email || !empleado.tallePredeterminado"></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
