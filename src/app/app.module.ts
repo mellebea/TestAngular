@@ -20,6 +20,7 @@ import { ListPageComponent } from './empleados/pages/list-page/list-page.compone
 import { PrimeNGModule } from './prime-ng/prime-ng.module';
 import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './empleados/pages/registro/registro.component';
+import { ListadoPrendasComponent } from './empleados/pages/listado-prendas/listado-prendas.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { RegistroComponent } from './empleados/pages/registro/registro.component
     LayaoutPageComponent,
     ListPageComponent,
     RegistroComponent,
+    ListadoPrendasComponent,
   ],
   imports: [
     BrowserModule,

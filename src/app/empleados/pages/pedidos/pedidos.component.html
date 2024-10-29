@@ -5,36 +5,42 @@
     <form (ngSubmit)="insertarPedido()">
 
       <div class="p-field">
-        <label for="id" class="p-mb-6">Empleado ID</label>
-        <input pInputText id="idEmpleado" [(ngModel)]="pedido.EmpleadoId" name="idEmpleado" required />
-        <small *ngIf="pedido.EmpleadoId" class="p-error"></small>
+        <label for="EmpleadoId" class="p-mb-6">Empleado ID</label>
+        <input pInputText id="EmpleadoId" [(ngModel)]="pedido.EmpleadoId" name="EmpleadoId" required />
+        <small *ngIf="pedido.EmpleadoId <= 0" class="p-error">Por favor, ingrese un ID de empleado válido.</small>
       </div>
 
       <div class="p-field">
-        <label for="id" class="p-mb-6">Fecha Pedido</label>
-        <input pInputText id="FechaPedido" [(ngModel)]="pedido.FechaPedido" name="FechaPedido" required />
-        <small *ngIf="pedido.FechaPedido" class="p-error"></small>
+        <label for="FechaPedido" class="p-mb-6">Fecha Pedido</label>
+        <input type="date" pInputText id="FechaPedido" [(ngModel)]="pedido.FechaPedido" name="FechaPedido" required />
+        <small *ngIf="!pedido.FechaPedido" class="p-error">Por favor, seleccione una fecha de pedido.</small>
       </div>
 
       <div class="p-field">
-        <label for="id" class="p-mb-6">Id Prenda</label>
-        <input pInputText id="IdPrenda" [(ngModel)]="pedido.IdPrenda" name="IdPrenda" required />
-        <small *ngIf="pedido.IdPrenda" class="p-error"></small>
+        <label for="prenda">Prenda</label>
+        <p-dropdown 
+            [options]="prendas"
+            [(ngModel)]="pedido.IdPrenda" name="IdPrenda"
+            optionLabel="nombrePrenda"
+            placeholder="Selecciona Prenda"
+            (onChange)="onPrendaChange($event)" />
+        <small *ngIf="pedido.IdPrenda <= 0" class="p-error">Por favor, seleccione una prenda.</small>
       </div>
 
       <div class="p-field">
-        <label for="id" class="p-mb-6">Talle</label>
-        <input pInputText id="talle" [(ngModel)]="pedido.talle" name="talle" required />
-        <small *ngIf="pedido.talle" class="p-error"></small>
+        <label for="talle" class="p-mb-6">Talla</label>
+        <input pInputText id="talle" [(ngModel)]="pedido.Talle" name="talle" required />
+        <small *ngIf="!pedido.Talle" class="p-error">Por favor, ingrese una talla.</small>
       </div>
 
       <div class="p-field">
-        <label for="id" class="p-mb-6">Cantidad</label>
-        <input pInputText id="cantidad" [(ngModel)]="pedido.cantidad" name="cantidad" required />
-        <small *ngIf="pedido.cantidad" class="p-error"></small>
+        <label for="cantidad" class="p-mb-6">Cantidad</label>
+        <input type="number" pInputText id="cantidad" [(ngModel)]="pedido.Cantidad" name="cantidad" required />
+        <small *ngIf="pedido.Cantidad <= 0" class="p-error">Por favor, ingrese una cantidad válida.</small>
       </div>
+
       <div class="p-field p-mt-2">
-        <button pButton type="submit" label="Guardar" [disabled]="!pedido.EmpleadoId || !pedido.FechaPedido || !pedido.IdPrenda || !pedido.talle || !pedido.cantidad"></button>
+        <button pButton type="submit" label="Guardar" [disabled]="!pedido.EmpleadoId || !pedido.FechaPedido || !pedido.IdPrenda || !pedido.Talle || !pedido.Cantidad"></button>
       </div>
     </form>
   </div>

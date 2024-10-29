@@ -2,8 +2,8 @@ export interface PrendasPedidas {
     EmpleadoId:  number;
     FechaPedido: Date;
     IdPrenda: number;
-    talle:    string;
-    cantidad: number;
+    Talle:    string;
+    Cantidad: number;
 }
 
 

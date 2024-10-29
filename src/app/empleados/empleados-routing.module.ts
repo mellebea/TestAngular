@@ -8,6 +8,7 @@ import { PrendasPedidasComponent } from './pages/prendas-pedidas/prendas-pedidas
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { LoginPageComponent } from '../auth/pages/login-page/login-page.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { ListadoPrendasComponent } from './pages/listado-prendas/listado-prendas.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
       {path:'pedidosEntregados',component:PedidosEntregadosComponent},
       {path:'prendasPedidas',component:PrendasPedidasComponent},
       {path:'newEmpleado',component:RegistroComponent},
-      {path:'usuario',component:LoginPageComponent}
+      {path:'usuario',component:LoginPageComponent},
+      {path:'listPrenda',component:ListadoPrendasComponent},
     ]
   }
 ];

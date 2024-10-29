@@ -4,6 +4,7 @@ import { TableModule } from 'primeng/table';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenubarModule,
     ButtonModule,
     ReactiveFormsModule,
-    
+    DropdownModule,
   ]
 })
 export class PrimeNGModule { }

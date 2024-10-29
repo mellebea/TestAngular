@@ -9,6 +9,7 @@ export class LayaoutPageComponent {
   public sidebarItems = [
     { label: 'Listado', icon: 'label', url: './list' },
     { label: 'Listado de Prendas Pedidas', icon: 'label', url: './prendasPedidas' },
+    { label: 'Listado de Prendas', icon: 'label', url: './listPrenda' },
     { label: 'Añadir', icon: 'add', url: './newEmpleado' },
     { label: 'Hacer Pedido', icon: 'pi-cart-arrow-down', url: './pedidos' },
     { label: 'Usuario', icon: 'pi-user', url: './usuario' },
