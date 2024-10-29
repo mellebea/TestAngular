@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmpleadosRoutingModule } from './empleados-routing.module';
 
-
 @NgModule({
   declarations: [
     
@@ -12,6 +11,7 @@ import { EmpleadosRoutingModule } from './empleados-routing.module';
     CommonModule,
     EmpleadosRoutingModule,
     MaterialModule,
+    
   ]
 })
 export class EmpleadosModule { }

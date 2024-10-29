@@ -13,7 +13,7 @@ import { ListadoPrendasComponent } from './pages/listado-prendas/listado-prendas
 const routes: Routes = [
   {
     path:'',
-    component:LayaoutPageComponent,
+    
     children:[
       {path:'list',component:ListPageComponent},
       {path:'pedidos',component:PedidosComponent},
