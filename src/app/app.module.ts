@@ -45,7 +45,8 @@ import { ListadoPrendasComponent } from './empleados/pages/listado-prendas/lista
     MaterialModule,
     PrimeNGModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+  
   ],
   providers: [
     provideAnimationsAsync(),

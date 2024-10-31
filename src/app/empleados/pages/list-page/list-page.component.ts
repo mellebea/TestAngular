@@ -2,6 +2,10 @@ import { EmpleadosService } from './../../services/empleados.service';
 
 import { Empleado } from './../../interfaces/empleados.interface';
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-list-page',
@@ -11,10 +15,19 @@ import { Component, OnInit } from '@angular/core';
 export class ListPageComponent implements OnInit{
   
   public empleados : Empleado[]=[];
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'email', 'tallePredeterminado'];  // Definir las columnas visibles
+  public empleadoSeleccionado: Empleado | null = null;
+  
+  metaKey: boolean = true;
 
 
-  constructor (private empleadosService: EmpleadosService){}
+  constructor (private empleadosService: EmpleadosService,private messageService: MessageService,private router: Router){}
+
+  selectedEmpleado(empleadoSeleccionado: Empleado) 
+  {
+    this.messageService.add({ severity: 'info', summary: 'Empleado Seleccionado', detail: empleadoSeleccionado.nombre });
+    this.router.navigate(['empleados/pedidos'], { state: { empleadoSeleccionado: empleadoSeleccionado } });
+    console.log(empleadoSeleccionado);
+  }
 
   ngOnInit(): void {
     this.empleadosService.getEmpleados()

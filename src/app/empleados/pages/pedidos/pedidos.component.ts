@@ -1,17 +1,29 @@
-import { PrendasPedidas } from './../../interfaces/prendasPedidas.interface';
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Empleado } from '../../interfaces/empleados.interface';
 import { Prenda } from '../../interfaces/prenda';
+import { PrendasPedidas } from './../../interfaces/prendasPedidas.interface';
 import { HacerPedidoPrendaService } from '../../services/hacer-pedido-prenda.service';
 
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
   styles: ``
 })
-export class PedidosComponent {
 
+
+
+export class PedidosComponent  implements OnInit  {
+
+  public empleadoSeleccionado: Empleado | null = null;
+  
+  
   prendas: Prenda[] = [];  // Cargar desde API
+  
   pedido: PrendasPedidas ={
     EmpleadoId: 0,
     FechaPedido : new Date(),
@@ -20,10 +32,28 @@ export class PedidosComponent {
     Cantidad: 0
   };
 
-  constructor(private pedidoService:HacerPedidoPrendaService){}
-   
+  constructor(private pedidoService:HacerPedidoPrendaService,private router: Router){}
+ 
+
   ngOnInit():void{
     this.ObtenerPrendas();
+    this.recibirDatosDeTablaEmpleados();
+  }
+
+  private recibirDatosDeTablaEmpleados(){
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      this.empleadoSeleccionado = navigation.extras.state['empleadoSeleccionado'];
+      if (this.empleadoSeleccionado) {
+        // Establecer los datos del empleado en `pedido`
+        this.pedido.EmpleadoId = this.empleadoSeleccionado.id;
+        console.log('Empleado seleccionado:', this.empleadoSeleccionado);
+      }
+    }
+    if (this.empleadoSeleccionado) {
+      console.log('Empleado seleccionado:', this.empleadoSeleccionado);
+    }
+
   }
 
   ObtenerPrendas()
@@ -67,7 +97,7 @@ export class PedidosComponent {
 
         this.pedidoService.postIngresarPedidoPrenda(this.pedido).subscribe({
           next: (response) => {
-            console.log("Pedido Guardado XXXXXXXXXXXXXXXXXX", response);
+            console.log("Pedido Guardado...", response);
             this.pedido = response;
           },
           error: (error) => {
@@ -85,5 +115,9 @@ export class PedidosComponent {
       Cantidad: 0
     };
   }
+
+  
+
+
   
 }
