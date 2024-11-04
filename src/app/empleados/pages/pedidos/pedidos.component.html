@@ -1,77 +1,87 @@
-<div class="flex">
-  <div class="p-grid p-fluid">
-    <div class="flex align-content-center flex-wrap" style="min-height: 200px">
-      <h2 class="p-text-center">Hacer un Pedido de Prenda</h2>
-
-    <form  (ngSubmit)="insertarPedido()">
-      <div class="field grid">
-        <label for="EmpleadoId" class="col-12 mb-2 md:col-2 md:mb-0">ID Empleado</label>
-        <div class="col-12 md:col-10">
-            <input id="EmpleadoId" [(ngModel)]="pedido.EmpleadoId" name="EmpleadoId" readonly type="text">
-        </div>
-    </div>
-    <div class="field grid">
-        <label for="nombre" class="col-12 mb-2 md:col-2 md:mb-0">Nombre</label>
-        <div class="col-12 md:col-10">
-            <input id="nombre" [value]="empleadoSeleccionado?.nombre" name="nombre" readonly type="text">
-        </div>
-    </div>
-    
-    <div class="field grid">
-      <label for="apellido" class="col-12 mb-2 md:col-2 md:mb-0">Apellido</label>
-      <div class="col-12 md:col-10">
-          <input id="apellido" [value]="empleadoSeleccionado?.apellido" name="apellido" readonly type="text">
-      </div>
-    </div>
-
-    <div class="field grid">
-      <label for="FechaPedido" class="col-12 mb-2 md:col-2 md:mb-0">FechaPedido</label>
-      <div class="col-12 md:col-10">
-          <input type="date" id="FechaPedido" [(ngModel)]="pedido.FechaPedido" name="FechaPedido" required>
-          <small *ngIf="!pedido.FechaPedido" class="p-error">Por favor, seleccione una fecha de pedido.</small>
-      </div>
-    </div>
-
-    <div class="p-field">
-      <label for="prenda">Prenda</label>
-      <p-dropdown 
-          [options]="prendas"
-          [(ngModel)]="pedido.IdPrenda" name="IdPrenda"
-          optionLabel="nombrePrenda"
-          placeholder="Selecciona Prenda"
-          (onChange)="onPrendaChange($event)" />
-      <small *ngIf="pedido.IdPrenda <= 0" class="p-error">Por favor, seleccione una prenda.</small>
-    </div>
-
-    <div class="field grid">
-      <label for="talle" class="col-12 mb-2 md:col-2 md:mb-0">Indique la Talla de la prenda.</label>
-      <div class="col-12 md:col-10">
-          <input type="text" id="talle" [(ngModel)]="pedido.Talle" name="talle" required>
-          <small *ngIf="!pedido.Talle" class="p-error">Por favor, ingrese una talla.</small>
-      </div>
-    </div>
-
-    <div class="field grid">
-      <label for="cantidad" class="col-12 mb-2 md:col-2 md:mb-0">Indique la cantidad.</label>
-      <div class="col-12 md:col-10">
-          <input type="text" id="cantidad" [(ngModel)]="pedido.Cantidad" name="talle" required>
-          <small *ngIf="!pedido.Cantidad" class="p-error">Por favor, ingrese la cantidad.</small>
-      </div>
-    </div>
-
-    
+<div class="flex flex-column align-items-center justify-content-center">
+  <div class="p-card p-shadow-3 p-p-4 w-full md:w-8 lg:w-6">
+    <h2 class="p-text-center">Hacer un Pedido de Prenda</h2>
     
 
-        <div class="w-11rem border-round bg-primary font-bold p-3 m-3 flex align-items-center justify-content-center">
-          <button pButton type="submit" label="Guardar" [disabled]="!pedido.EmpleadoId || !pedido.FechaPedido || !pedido.IdPrenda || !pedido.Talle || !pedido.Cantidad"></button>
-        </div>
-        
-  
-       
+   
+
+      <form  (ngSubmit)="insertarPedido()">
       
-    
+        <div class="p-field grid">
+          <label for="EmpleadoId" class="col-12 mb-2 md:col-3 md:mb-0">ID Empleado</label>
+          <div class="col-12 md:col-9">
+            <input id="EmpleadoId" [(ngModel)]="pedido.EmpleadoId" name="EmpleadoId" readonly type="text" class="p-inputtext">
+          </div>
+        </div>
 
+
+        <div class="p-field grid">
+          <label for="nombre" class="col-12 mb-2 md:col-3 md:mb-0">Nombre</label>
+          <div class="col-12 md:col-9">
+            <input id="nombre" [value]="empleadoSeleccionado?.nombre" name="nombre" readonly type="text" class="p-inputtext">
+          </div>
+        </div>
+    
+        <div class="p-field grid">
+          <label for="apellido" class="col-12 mb-2 md:col-3 md:mb-0">Apellido</label>
+          <div class="col-12 md:col-9">
+            <input id="apellido" [value]="empleadoSeleccionado?.apellido" name="apellido" readonly type="text" class="p-inputtext">
+          </div>
+        </div>
+
+        <div class="p-field grid">
+          <label for="FechaPedido" class="col-12 mb-2 md:col-3 md:mb-0">Fecha Pedido</label>
+          <div class="col-12 md:col-9">
+            <input type="date" id="FechaPedido" [(ngModel)]="pedido.FechaPedido" name="FechaPedido" required class="p-inputtext">
+            <small *ngIf="!pedido.FechaPedido" class="p-error">Por favor, seleccione una fecha de pedido.</small>
+          </div>
+        </div>
+
+        <div class="p-field grid">
+          <label for="prenda" class="col-12 mb-2 md:col-3 md:mb-0">Prenda</label>
+          <div class="col-12 md:col-9">
+            <p-dropdown 
+                [options]="prendas"
+                [(ngModel)]="pedido.IdPrenda" name="IdPrenda"
+                optionLabel="nombrePrenda"
+                placeholder="Selecciona Prenda"
+                class="w-full"
+                (onChange)="onPrendaChange($event)">
+            </p-dropdown>
+            <small *ngIf="pedido.IdPrenda <= 0" class="p-error">Por favor, seleccione una prenda.</small>
+          </div>
+        </div>
+
+        <div class="p-field grid">
+          <label for="talle" class="col-12 mb-2 md:col-3 md:mb-0">Talla</label>
+          <div class="col-12 md:col-9">
+            <input type="text" id="talle" [(ngModel)]="pedido.Talle" name="talle" required class="p-inputtext">
+            <small *ngIf="!pedido.Talle" class="p-error">Por favor, ingrese una talla.</small>
+          </div>
+        </div>
+
+        <div class="p-field grid">
+          <label for="cantidad" class="col-12 mb-2 md:col-3 md:mb-0">Cantidad</label>
+          <div class="col-12 md:col-9">
+            <input type="number" id="cantidad" [(ngModel)]="pedido.Cantidad" name="cantidad" required class="p-inputtext">
+            <small *ngIf="!pedido.Cantidad" class="p-error">Por favor, ingrese la cantidad.</small>
+          </div>
+        </div>
+
+        
+        <div class="flex align-items-center justify-content-center mt-3">
+          <button pButton type="submit" label="Guardar" class="p-button-success w-full md:w-6" [disabled]="!pedido.EmpleadoId || !pedido.FechaPedido || !pedido.IdPrenda || !pedido.Talle || !pedido.Cantidad"></button>
+        </div>
     </form>
+
+
+
+
+
+
+
+
+    
 
    
     
