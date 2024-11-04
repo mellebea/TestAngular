@@ -10,6 +10,8 @@ import { HacerPedidoPrendaService } from '../../services/hacer-pedido-prenda.ser
 })
 export class ListadoPrendasComponent {
 
+
+
   public prenda:Prenda[]=[];
 
   displayedColumns: string[] = ['Id', 'nombrePrenda', 'Descripcion' ];  // Definir las columnas visibles
