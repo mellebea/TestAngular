@@ -8,6 +8,8 @@ import { PrendasPedidas } from './../../interfaces/prendasPedidas.interface';
 import { HacerPedidoPrendaService } from '../../services/hacer-pedido-prenda.service';
 
 import { NavigationExtras } from '@angular/router';
+import { GetEmpleado } from '../../services/get-empleado.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pedidos',
@@ -32,33 +34,27 @@ export class PedidosComponent  implements OnInit  {
     Cantidad: 0
   };
 
-  constructor(private pedidoService:HacerPedidoPrendaService,private router: Router){}
+  constructor(private pedidoService:HacerPedidoPrendaService,private router: Router, 
+              private getEmpleado:GetEmpleado,private toastr: ToastrService){}
  
 
   ngOnInit():void{
     this.ObtenerPrendas();
-    this.recibirDatosDeTablaEmpleados();
+    this.EmpleadoSeleccionado();
   }
 
-  private recibirDatosDeTablaEmpleados(){
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras.state) {
-      this.empleadoSeleccionado = navigation.extras.state['empleadoSeleccionado'];
-      if (this.empleadoSeleccionado) {
-        // Establecer los datos del empleado en `pedido`
-        this.pedido.EmpleadoId = this.empleadoSeleccionado.id;
-        console.log('Empleado seleccionado:', this.empleadoSeleccionado);
-      }
-    }
-    if (this.empleadoSeleccionado) {
-      console.log('Empleado seleccionado:', this.empleadoSeleccionado);
-    }
-
+  EmpleadoSeleccionado(){
+    this.empleadoSeleccionado = this.getEmpleado.getEmpleado();
+  if (this.empleadoSeleccionado) {
+    this.pedido.EmpleadoId = this.empleadoSeleccionado.id;
+    console.log('Empleado seleccionado recibido:', this.empleadoSeleccionado);
+  } else {
+    console.log('No se recibió ningún empleado seleccionado.');
+  }
   }
 
   ObtenerPrendas()
   {
-    
     this.pedidoService.getPrendas().subscribe(prendas=>this.prendas=prendas);
   }
 
@@ -71,8 +67,6 @@ export class PedidosComponent  implements OnInit  {
       this.pedido.IdPrenda = 0; // Restablece a 0 si no hay prenda seleccionada
     }
   }
-
-
 
   insertarPedido()
   {
@@ -87,6 +81,7 @@ export class PedidosComponent  implements OnInit  {
         if (this.pedido.EmpleadoId <= 0 || this.pedido.IdPrenda <= 0 || !this.pedido.Talle || 
             this.pedido.Cantidad <= 0) {
           console.error("Por favor, completa todos los campos requeridos.");
+          this.toastr.success('Por favor, completa todos los campos requeridos.', 'Alerta');
           return;
         }
 
@@ -99,8 +94,10 @@ export class PedidosComponent  implements OnInit  {
           next: (response) => {
             console.log("Pedido Guardado...", response);
             this.pedido = response;
+            this.toastr.success('Pedido Realizado con Exito...', 'Pedido Exitoso');
           },
           error: (error) => {
+            this.toastr.success('Error al guardar el pedido...', 'Error');
             console.log("Error al guardar el pedido", error.error || error.message || error);
           }
         });

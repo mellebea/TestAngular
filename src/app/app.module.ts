@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +48,9 @@ import { ListadoPrendasComponent } from './empleados/pages/listado-prendas/lista
     PrimeNGModule,
     ButtonModule,
     FormsModule,
-  
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    
   ],
   providers: [
     provideAnimationsAsync(),

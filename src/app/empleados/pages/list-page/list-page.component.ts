@@ -4,6 +4,7 @@ import { Empleado } from './../../interfaces/empleados.interface';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { GetEmpleado } from '../../services/get-empleado.service';
 
 
 
@@ -20,18 +21,20 @@ export class ListPageComponent implements OnInit{
   metaKey: boolean = true;
 
 
-  constructor (private empleadosService: EmpleadosService,private messageService: MessageService,private router: Router){}
+  constructor (private empleadosService: EmpleadosService, private getEmpleado:GetEmpleado,
+               private router: Router){}
 
-  selectedEmpleado(empleadoSeleccionado: Empleado) 
-  {
-    this.messageService.add({ severity: 'info', summary: 'Empleado Seleccionado', detail: empleadoSeleccionado.nombre });
-    this.router.navigate(['empleados/pedidos'], { state: { empleadoSeleccionado: empleadoSeleccionado } });
-    console.log(empleadoSeleccionado);
-  }
+  
 
   ngOnInit(): void {
     this.empleadosService.getEmpleados()
     .subscribe(empleados=>this.empleados=empleados);
+  }
+
+  selectedEmpleado(empleado: Empleado) {
+    this.getEmpleado.setEmpleado(empleado);
+    this.router.navigateByUrl('empleados/pedidos');
+    console.log(empleado);
   }
 
 }
