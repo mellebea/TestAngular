@@ -7,9 +7,12 @@ import { Prenda } from '../../interfaces/prenda';
 import { PrendasPedidas } from './../../interfaces/prendasPedidas.interface';
 import { HacerPedidoPrendaService } from '../../services/hacer-pedido-prenda.service';
 
-import { NavigationExtras } from '@angular/router';
+
 import { GetEmpleado } from '../../services/get-empleado.service';
 import { ToastrService } from 'ngx-toastr';
+import { PedidoService } from '../../services/pedido.service';
+import { Pedido } from '../../interfaces/pedido';
+
 
 @Component({
   selector: 'app-pedidos',
@@ -21,11 +24,16 @@ import { ToastrService } from 'ngx-toastr';
 
 export class PedidosComponent  implements OnInit  {
 
+  //Objeto que recibe los datos del empleado seleccionado desde la tabla de lista de empleados
   public empleadoSeleccionado: Empleado | null = null;
   
-  
+  //Objeto para cargar el dropBox pera mostrar las prendas a seleccionar
   prendas: Prenda[] = [];  // Cargar desde API
   
+  //Array para guarda varias prendas para un mismo pedido por empleado
+  ListaPrendaPedida:any[]=[]; 
+  
+  //Inicializacion de modelo para ingresar los datos a la base de datos
   pedido: PrendasPedidas ={
     EmpleadoId: 0,
     FechaPedido : new Date(),
@@ -34,8 +42,18 @@ export class PedidosComponent  implements OnInit  {
     Cantidad: 0
   };
 
-  constructor(private pedidoService:HacerPedidoPrendaService,private router: Router, 
-              private getEmpleado:GetEmpleado,private toastr: ToastrService){}
+  prendaSeleccionada = {
+    PrendaId: 0,
+    Talle: '',
+    Cantidad: 0
+  };
+
+
+  
+
+  constructor(private router: Router, 
+              private getEmpleado:GetEmpleado,private toastr: ToastrService,
+              private pedidoConPrenda:PedidoService){}
  
 
   ngOnInit():void{
@@ -45,17 +63,18 @@ export class PedidosComponent  implements OnInit  {
 
   EmpleadoSeleccionado(){
     this.empleadoSeleccionado = this.getEmpleado.getEmpleado();
-  if (this.empleadoSeleccionado) {
-    this.pedido.EmpleadoId = this.empleadoSeleccionado.id;
-    console.log('Empleado seleccionado recibido:', this.empleadoSeleccionado);
-  } else {
-    console.log('No se recibió ningún empleado seleccionado.');
-  }
+    if (this.empleadoSeleccionado) {
+      this.pedido.EmpleadoId = this.empleadoSeleccionado.id;
+      console.log('Empleado seleccionado recibido:', this.empleadoSeleccionado);
+    } 
+    else {
+      console.log('No se recibió ningún empleado seleccionado.');
+    }
   }
 
   ObtenerPrendas()
   {
-    this.pedidoService.getPrendas().subscribe(prendas=>this.prendas=prendas);
+    this.pedidoConPrenda.getPrendas().subscribe(prendas=>this.prendas=prendas);
   }
 
   onPrendaChange(event: any) {
@@ -68,53 +87,68 @@ export class PedidosComponent  implements OnInit  {
     }
   }
 
-  insertarPedido()
-  {
-    if (this.pedido.Talle.length > 10) {
-      console.error("El campo Talle no puede tener más de 10 caracteres.");
-      return; // Detiene la ejecución si Talle es demasiado largo
+  agregarPrenda() {
+    this.prendaSeleccionada.PrendaId=this.pedido.IdPrenda;
+    this.prendaSeleccionada.Talle=this.pedido.Talle;
+    this.prendaSeleccionada.Cantidad=this.pedido.Cantidad;
+    
+    if (this.prendaSeleccionada.PrendaId && this.prendaSeleccionada.Talle && this.prendaSeleccionada.Cantidad){
+      console.log('Id prenda',this.prendaSeleccionada.PrendaId);
+      console.log('Talle',this.prendaSeleccionada.Talle);
+      console.log('Cantidad',this.pedido.Cantidad);
+      this.ListaPrendaPedida.push({ ...this.prendaSeleccionada });
+      
     }
-        this.pedido.FechaPedido = new Date();
-        this.pedido.EmpleadoId = Number(this.pedido.EmpleadoId);
-        
-        // Validar que todos los campos estén llenos y sean correctos
-        if (this.pedido.EmpleadoId <= 0 || this.pedido.IdPrenda <= 0 || !this.pedido.Talle || 
-            this.pedido.Cantidad <= 0) {
-          console.error("Por favor, completa todos los campos requeridos.");
-          this.toastr.success('Por favor, completa todos los campos requeridos.', 'Alerta');
-          return;
-        }
+    else {
+      this.toastr.error('Completa todos los campos para agregar la prenda.');
+    }
 
-        console.log('Pedido a enviar:', this.pedido);
-        console.log('Id de empleado',this.pedido.EmpleadoId); 
-        console.log('Talla',this.pedido.Talle); 
-        console.log('Id Prenda',this.pedido.IdPrenda); 
-
-        this.pedidoService.postIngresarPedidoPrenda(this.pedido).subscribe({
-          next: (response) => {
-            console.log("Pedido Guardado...", response);
-            this.pedido = response;
-            this.toastr.success('Pedido Realizado con Exito...', 'Pedido Exitoso');
-          },
-          error: (error) => {
-            this.toastr.success('Error al guardar el pedido...', 'Error');
-            console.log("Error al guardar el pedido", error.error || error.message || error);
-          }
-        });
     
   }
-  private resetPedido() {
-    this.pedido = {
-      EmpleadoId: 0,
-      FechaPedido: new Date(),
-      IdPrenda: 0,
-      Talle: '',
-      Cantidad: 0
+
+  insertarPedido(){
+    if (this.ListaPrendaPedida.length === 0) {
+      this.toastr.error('No se puede guardar un pedido sin prendas.');
+      return;
+    }
+    const pedidoCompleto = {
+      EmpleadoId: this.pedido.EmpleadoId,
+      FechaPedido: this.pedido.FechaPedido,
+      PrendasPedidas: this.ListaPrendaPedida
     };
+    console.log('pedidoCompleto',pedidoCompleto);
+
+    this.pedidoConPrenda.postIngresarPedidoConPrenda(pedidoCompleto).subscribe({
+      next: (response) => {
+        this.toastr.success('Pedido realizado con éxito.');
+        this.resetFormulario();
+      },
+      error: (error) => {
+        this.toastr.error('Error al realizar el pedido.');
+        console.error(error);
+        console.error("Error al guardar el pedido:", error);
+    if (error.error) {
+      console.error("Detalle del error:", error.error);
+    } else {
+      console.error("Mensaje de error:", error.message);
+    }
+    this.toastr.error('Error al guardar el pedido...', 'Error');
+      }
+    });
+    
+
+    
   }
 
-  
-
-
-  
+    resetFormulario() {
+      this.ListaPrendaPedida = [];
+      this.pedido = {
+        EmpleadoId: this.empleadoSeleccionado?.id || 0,
+        FechaPedido: new Date(),
+        IdPrenda: 0,
+        Talle: '',
+        Cantidad: 0
+      };
+    }
+    
 }
