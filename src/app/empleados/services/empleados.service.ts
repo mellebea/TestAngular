@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Empleado } from '../interfaces/empleados.interface';
 
@@ -18,6 +18,15 @@ export class EmpleadosService {
   getEmpleados():Observable<Empleado[]>{
     
     return this.http.get<Empleado[]>(this.baseURL);
+  }
+
+  postEmpleado(empleado:Empleado):Observable<Empleado> {
+    
+    return  this.http.post<Empleado>(this.baseURL,empleado,{
+        headers:new HttpHeaders({'Content-Type': 'application/json'})
+      }
+
+      );
   }
   
 }
