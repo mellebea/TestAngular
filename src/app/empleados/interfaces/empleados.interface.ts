@@ -1,7 +1,7 @@
 export interface Empleado {
-    Id:                  number;
-    Nombre:              string;
-    Apellido:            string;
-    Email:               string;
-    TallePredeterminado: string;
+    id:                  number;
+    nombre:              null | string;
+    apellido:            null | string;
+    email:               null | string;
+    tallePredeterminado: null | string;
 }

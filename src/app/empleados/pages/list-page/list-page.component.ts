@@ -1,11 +1,9 @@
-import { EmpleadosService } from './../../services/empleados.service';
-
-import { Empleado } from './../../interfaces/empleados.interface';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
-import { GetEmpleado } from '../../services/get-empleado.service';
 
+import { Empleado } from '../../interfaces/empleados.interface';
+import { EmpleadosService } from '../../services/empleados.service';
+import { Route, Router } from '@angular/router';
+import { GetEmpleado } from '../../services/get-empleado.service';
 
 
 @Component({

@@ -64,7 +64,7 @@ export class PedidosComponent  implements OnInit  {
   EmpleadoSeleccionado(){
     this.empleadoSeleccionado = this.getEmpleado.getEmpleado();
     if (this.empleadoSeleccionado) {
-      this.pedido.EmpleadoId = this.empleadoSeleccionado.Id;
+      this.pedido.EmpleadoId = this.empleadoSeleccionado.id;
       console.log('Empleado seleccionado recibido:', this.empleadoSeleccionado);
     } 
     else {
@@ -143,7 +143,7 @@ export class PedidosComponent  implements OnInit  {
     resetFormulario() {
       this.ListaPrendaPedida = [];
       this.pedido = {
-        EmpleadoId: this.empleadoSeleccionado?.Id || 0,
+        EmpleadoId: this.empleadoSeleccionado?.id || 0,
         FechaPedido: new Date(),
         IdPrenda: 0,
         Talle: '',

@@ -11,11 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 export class RegistroComponent implements OnInit{
 
   empleado:Empleado={
-    Id:                  0,
-    Nombre:              '',
-    Apellido:            '',
-    Email:               '',
-    TallePredeterminado: ''
+    id:                  0,
+    nombre:              '',
+    apellido:            '',
+    email:               '',
+    tallePredeterminado: ''
   };
 
   constructor(private serviceEmpleado:EmpleadosService,private toastr: ToastrService,){}

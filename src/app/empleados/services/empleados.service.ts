@@ -15,8 +15,9 @@ export class EmpleadosService {
 
   constructor (private http:HttpClient){};
 
+  
   getEmpleados():Observable<Empleado[]>{
-    
+ 
     return this.http.get<Empleado[]>(this.baseURL);
   }
 

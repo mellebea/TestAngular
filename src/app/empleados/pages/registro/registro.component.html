@@ -8,33 +8,29 @@
           <div class="formgrid grid">
             <div class="field col-12 md:col-6">
                 <label for="nombre">Nombre</label>
-                <input id="nombre" [(ngModel)]="empleado.Nombre" name="nombre" required  type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-                <small *ngIf="empleado.Nombre?.length === 0" class="p-error">Nombre es requerido.</small>
+                <input id="nombre" [(ngModel)]="empleado.nombre" name="nombre" required  type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                <small *ngIf="empleado.nombre?.length === 0" class="p-error">Nombre es requerido.</small>
             </div>
             <div class="field col-12 md:col-6">
                 <label for="apellido">Apellido</label>
-                <input id="apellido" [(ngModel)]="empleado.Apellido" name="apellido" required type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-                <small *ngIf="empleado.Apellido?.length === 0" class="p-error">Apellido es requerido.</small>
+                <input id="apellido" [(ngModel)]="empleado.apellido" name="apellido" required type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                <small *ngIf="empleado.apellido?.length === 0" class="p-error">Apellido es requerido.</small>
             </div>
             <div class="field col-12 md:col-6">
               <label for="email">Email</label>
-              <input id="email" [(ngModel)]="empleado.Email" name="email" required type="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-              <small *ngIf="empleado.Email?.length === 0" class="p-error">Email es requerido.</small>
-              <small *ngIf="!empleado.Email?.includes('@')" class="p-error">Email no es válido.</small>
+              <input id="email" [(ngModel)]="empleado.email" name="email" required type="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+              <small *ngIf="empleado.email?.length === 0" class="p-error">Email es requerido.</small>
+              <small *ngIf="!empleado.email?.includes('@')" class="p-error">Email no es válido.</small>
             </div>
             <div class="field col-12 md:col-6">
               <label for="tallePredeterminado">Talla</label>
-              <input id="tallePredeterminado" [(ngModel)]="empleado.TallePredeterminado" name="talle" required type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-              <small *ngIf="empleado.TallePredeterminado?.length === 0" class="p-error">Talle es requerido.</small>
+              <input id="tallePredeterminado" [(ngModel)]="empleado.tallePredeterminado" name="talle" required type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+              <small *ngIf="empleado.tallePredeterminado?.length === 0" class="p-error">Talle es requerido.</small>
             </div>
         </div>
-
-
-
-          
   
           <div class="p-field p-mt-2">
-            <button pButton type="submit" label="Guardar" [disabled]="!empleado.Nombre || !empleado.Apellido || !empleado.Email || !empleado.TallePredeterminado"></button>
+            <button pButton type="submit" label="Guardar" [disabled]="!empleado.nombre || !empleado.apellido || !empleado.email || !empleado.tallePredeterminado"></button>
           </div>
         </form>
       </div>
