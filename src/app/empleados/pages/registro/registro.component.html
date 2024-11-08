@@ -1,8 +1,8 @@
 <div class="flex flex-column align-items-center justify-content-center">
    
       <div class="card p-shadow-3 p-p-4 w-full md:w-8 lg:w-6">
-        <h2 class="p-text-center">Registrar Empleado</h2>
-  
+        <h2 class="p-text-center">{{ empleadoSeleccionado ? 'Actualizar Empleado' : 'Registrar Empleado' }}</h2>
+
         <form (ngSubmit)="guardarEmpleado()">
 
           <div class="formgrid grid">
@@ -27,11 +27,15 @@
               <input id="tallePredeterminado" [(ngModel)]="empleado.tallePredeterminado" name="talle" required type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
               <small *ngIf="empleado.tallePredeterminado?.length === 0" class="p-error">Talle es requerido.</small>
             </div>
-        </div>
-  
-          <div class="p-field p-mt-2">
-            <button pButton type="submit" label="Guardar" [disabled]="!empleado.nombre || !empleado.apellido || !empleado.email || !empleado.tallePredeterminado"></button>
           </div>
+  
+          <!--div class="p-field p-mt-2">
+            <button pButton type="submit" label="Guardar" [disabled]="!empleado.nombre || !empleado.apellido || !empleado.email || !empleado.tallePredeterminado"></button>
+          </!--div-->
+          <div class="p-field p-mt-2">
+            <button pButton (click)="actualizarEmpleado()">Actualizar</button>
+          </div>
+          
         </form>
       </div>
     </div>

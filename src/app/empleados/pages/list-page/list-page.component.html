@@ -1,4 +1,21 @@
 <div style="max-width: 800px; margin: 0 auto;">
+    
+    <div>
+        <h5 class="p-text-center">Filtro</h5>
+        <div class="field col-12 md:col-6">
+            <label for="nombre">Nombre</label>
+            <input [(ngModel)]="nombreFiltro" placeholder="Nombre" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="apellido">Apellido</label>
+            <input [(ngModel)]="apellidoFiltro" placeholder="Apellido" ype="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" /> 
+        </div>
+        
+        <button pButton (click)="filtrarEmpleados()">Buscar</button>
+    </div>
+    
+
+
     <div class="card">
         <p-toast />
         <p-table [value]="empleados" [tableStyle]="{ 'min-width': '50rem' }">
@@ -17,6 +34,7 @@
                     <td>{{ empleados.apellido }}</td>
                     <td>{{ empleados.email }}</td>
                     <td>{{ empleados.tallePredeterminado }}</td>
+                    <td><i (click)="selectedEmpleadoActualizar(empleados)" class="fa-solid fa-pen-to-square text-info"></i></td>
                     <td>
                         <button 
                             type="button" 
@@ -33,4 +51,4 @@
     
     
     
-    </div>
+</div>

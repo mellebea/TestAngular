@@ -14,8 +14,18 @@ import { GetEmpleado } from '../../services/get-empleado.service';
 export class ListPageComponent implements OnInit{
   
   public empleados : Empleado[]=[];
-  public empleadoSeleccionado: Empleado | null = null;
   
+  empleado: Empleado = {
+    id: 0,
+    nombre: '',
+    apellido: '',
+    email: '',
+    tallePredeterminado: ''
+  };
+  public empleadoSeleccionado: Empleado | null = null;
+  public nombreFiltro: string = '';
+  public apellidoFiltro: string = '';
+
   metaKey: boolean = true;
 
 
@@ -34,5 +44,26 @@ export class ListPageComponent implements OnInit{
     this.router.navigateByUrl('empleados/pedidos');
     console.log(empleado);
   }
+
+  filtrarEmpleados() {
+    this.empleadosService.filtrarEmpleado(this.nombreFiltro, this.apellidoFiltro).subscribe(
+      empleados => {
+        this.empleados = empleados;
+      },
+      error => {
+        console.error('Error al filtrar empleados:', error);
+      }
+    );
+  }
+
+  selectedEmpleadoActualizar(empleado: Empleado) {
+    this.getEmpleado.setEmpleado(empleado);
+    this.router.navigateByUrl('empleados/newEmpleado');
+    console.log(empleado);
+   
+  }
+  
+  
+
 
 }

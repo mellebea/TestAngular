@@ -7,12 +7,11 @@ import { Component } from '@angular/core';
 })
 export class SideMenuComponent {
   public sidebarItems = [
-    { label: 'Listado', icon: 'label', url: 'empleados/list' },
+    { label: 'Listado de Empleados', icon: 'label', url: 'empleados/list' },
     { label: 'Listado de Prendas Pedidas', icon: 'label', url: 'empleados/prendasPedidas' },
     { label: 'Listado de Prendas', icon: 'label', url: 'empleados/listPrenda' },
     { label: 'Listado de P.Entregados', icon: 'label', url: 'empleados/pedidosEntregados' },
-    { label: 'Añadir', icon: 'add', url: 'empleados/newEmpleado' },
-    { label: 'Hacer Pedido', icon: 'pi-cart-arrow-down', url: 'empleados/pedidos' },
+    { label: 'Añadir Empleado', icon: 'add', url: 'empleados/newEmpleado' },
     { label: 'Usuario', icon: 'pi-user', url: 'auth/usuario' },
   ]
 }
