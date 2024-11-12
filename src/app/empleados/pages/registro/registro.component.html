@@ -33,7 +33,7 @@
             <button pButton type="submit" label="Guardar" [disabled]="!empleado.nombre || !empleado.apellido || !empleado.email || !empleado.tallePredeterminado"></button>
           </!--div-->
           <div class="p-field p-mt-2">
-            <button pButton (click)="actualizarEmpleado()">Actualizar</button>
+            <button pButton type="submit" label="{{ empleadoSeleccionado ? 'Actualizar' : 'Crear' }}"></button>
           </div>
           
         </form>

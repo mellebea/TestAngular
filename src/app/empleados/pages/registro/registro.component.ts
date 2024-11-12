@@ -63,7 +63,7 @@ export class RegistroComponent implements OnInit{
         this.resetFormulario();
       },
       error: (error) => {
-        console.error('Error al guardar el empleado:', error);
+        console.error(' XXXXXXXXXXXError al guardar el empleado:', error);
       }
     })
   }
