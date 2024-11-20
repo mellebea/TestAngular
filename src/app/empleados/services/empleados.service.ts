@@ -12,6 +12,7 @@ import { Empleado } from '../interfaces/empleados.interface';
 export class EmpleadosService {
 
   private baseURL: string = 'https://localhost:44301/api/Empleado';
+                          
 
   constructor (private http:HttpClient){};
 
@@ -21,10 +22,10 @@ export class EmpleadosService {
     return this.http.get<Empleado[]>(this.baseURL);
   }
 
-  postEmpleado(empleado:Empleado):Observable<Empleado> {
+  postEmpleado(empleado:Empleado):Observable<any> {
     
-    return  this.http.post<Empleado>(this.baseURL,empleado,{
-        headers:new HttpHeaders({'Content-Type': 'application/json'})
+    return  this.http.post<Empleado>('https://localhost:44301/api/Empleado',empleado,{
+      headers:new HttpHeaders({'Content-type':'application/json'})
       }
 
       );

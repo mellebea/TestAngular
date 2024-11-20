@@ -54,7 +54,16 @@ export class RegistroComponent implements OnInit{
   }
 
   nuevoEmpleado(){
-    console.log('Empleado guardado', this.empleado);
+
+    if (!this.empleado.nombre || !this.empleado.apellido || !this.empleado.email || !this.empleado.tallePredeterminado) {
+      console.error('Por favor, completa todos los campos obligatorios.');
+      this.toastr.error('Por favor, completa todos los campos obligatorios.');
+      return;
+  }
+
+ 
+    console.log('Nuevo Empleado guardado', this.empleado);
+    
 
     this.serviceEmpleado.postEmpleado(this.empleado).subscribe({
       next: (respuesta) => {
@@ -63,12 +72,13 @@ export class RegistroComponent implements OnInit{
         this.resetFormulario();
       },
       error: (error) => {
-        console.error(' XXXXXXXXXXXError al guardar el empleado:', error);
+        console.error('Error al guardar el empleado:', error);
       }
     })
   }
 
   actualizarEmpleado() {
+    console.log('el empleado a actualizar es',this.empleado);
     this.serviceEmpleado.putEmpleado(this.empleado.id, this.empleado).subscribe(
       response => {
         console.log('Empleado actualizado con éxito:', response.message);
