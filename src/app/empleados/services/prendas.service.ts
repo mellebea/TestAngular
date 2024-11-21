@@ -1,10 +1,12 @@
+import { Prenda } from './../interfaces/prenda';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Prenda } from '../interfaces/prenda';
+
+import { PrendasEntregadas } from '../interfaces/PrendasEntrgadas.interface';
 
 @Injectable({providedIn: 'root'})
-export class ServiceNameService {
+export class PrendasService {
 
   private baseURL:string='https://localhost:44301/api/Prendas'
   
@@ -13,6 +15,14 @@ export class ServiceNameService {
   getPrendas():Observable<Prenda[]>
   {
     return this.httpt.get<Prenda[]>(this.baseURL);
+  }
+
+  filtrarPrendasEntregadas(nombre: string = '', apellido: string = ''): Observable<PrendasEntregadas[]> {
+    const params = new HttpParams()
+      .set('nombre', nombre)
+      .set('apellido', apellido);
+
+    return this.httpt.get<PrendasEntregadas[]>(`${this.baseURL}/Filtrar`, { params });
   }
   
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Prenda } from '../../interfaces/prenda';
-import { ServiceNameService } from '../../services/prendas.service';
+
 import { HacerPedidoPrendaService } from '../../services/hacer-pedido-prenda.service';
 
 @Component({

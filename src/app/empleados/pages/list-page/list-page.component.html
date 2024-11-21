@@ -1,17 +1,24 @@
 <div style="max-width: 800px; margin: 0 auto;">
-   <div class="p-card p-shadow-3 p-p-4 w-full md:w-8 lg:w-6">
+   <div class="p-card p-shadow-2 p-p-4 w-full md:w-8 lg:w-12">
     <div>
-        <h5 class="p-text-center">Filtro</h5>
-        <div class="field col-12 md:col-6">
-            <label for="nombre">Nombre</label>
-            <input [(ngModel)]="nombreFiltro" placeholder="Nombre" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
-        </div>
-        <div class="field col-12 md:col-6">
-            <label for="apellido">Apellido</label>
-            <input [(ngModel)]="apellidoFiltro" placeholder="Apellido" ype="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" /> 
+        <h5 class="pl-3">Filtro</h5>
+        <div class="px-3">
+            <div class="formgrid grid">
+                <div class="field col md:col-6">
+                    <label for="nombre">Nombre</label>
+                    <input [(ngModel)]="nombreFiltro" placeholder="Nombre" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                </div>
+                <div class="field col md:col-6">
+                    <label for="apellido">Apellido</label>
+                    <input [(ngModel)]="apellidoFiltro" placeholder="Apellido" ype="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" /> 
+                </div>
+                
+                <button class="py-3" pButton (click)="filtrarEmpleados()">Buscar</button>
+    
+            </div>
         </div>
         
-        <button pButton (click)="filtrarEmpleados()">Buscar</button>
+        
     </div>
    </div> 
     
