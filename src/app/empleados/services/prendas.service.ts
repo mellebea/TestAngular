@@ -24,5 +24,10 @@ export class PrendasService {
 
     return this.httpt.get<PrendasEntregadas[]>(`${this.baseURL}/Filtrar`, { params });
   }
+
+  getlistadoPrendasEntregadas():Observable<PrendasEntregadas[]>{
+ 
+    return this.httpt.get<PrendasEntregadas[]>(`${this.baseURL}/Listado`);
+  }
   
 }

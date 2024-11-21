@@ -22,11 +22,13 @@ export class PedidosEntregadosComponent implements OnInit{
   constructor(private prendaEntregadaService:PrendasService, private router: Router){}
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.prendaEntregadaService.getlistadoPrendasEntregadas()
+    .subscribe(prendaEntregada=>this.prendaEntregada=prendaEntregada);
   }
 
   filtrarPrendasEntregadas() {
-    this.prendaEntregadaService.filtrarPrendasEntregadas(this.nombreFiltro, this.apellidoFiltro).subscribe(
+    this.prendaEntregadaService.filtrarPrendasEntregadas(this.nombreFiltro, this.apellidoFiltro)
+    .subscribe(
       prendaEntregada => {
         this.prendaEntregada = prendaEntregada;
       },
