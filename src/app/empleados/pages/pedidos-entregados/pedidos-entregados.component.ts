@@ -15,6 +15,9 @@ export class PedidosEntregadosComponent implements OnInit{
   public prendaEntregada : PrendasEntregadas []=[];
   public nombreFiltro: string = '';
   public apellidoFiltro: string = '';
+  
+  first = 0;
+  rows = 10;
 
   constructor(private prendaEntregadaService:PrendasService, private router: Router){}
   
@@ -32,6 +35,31 @@ export class PedidosEntregadosComponent implements OnInit{
       }
     );
   }
+
+  next() {
+    this.first = this.first + this.rows;
+}
+
+prev() {
+    this.first = this.first - this.rows;
+}
+
+reset() {
+    this.first = 0;
+}
+
+pageChange(event:any) {
+    this.first = event.first;
+    this.rows = event.rows;
+}
+
+isLastPage(): boolean {
+  return this.prendaEntregada ? this.first === this.prendaEntregada.length - this.rows : true;
+}
+
+isFirstPage(): boolean {
+  return this.prendaEntregada ? this.first === 0 : true;
+}
   
 
 }

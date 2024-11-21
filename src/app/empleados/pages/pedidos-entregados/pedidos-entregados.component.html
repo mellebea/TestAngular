@@ -1,22 +1,99 @@
-<div class="p-card p-shadow-2 p-p-4 w-full md:w-8 lg:w-12">
+
+<div style="max-width: 800px; margin: 0 auto;">
     <div>
-        <h5 class="pl-3">Filtro</h5>
-        <div class="px-3">
-            <div class="formgrid grid">
-                <div class="field col md:col-6">
-                    <label for="nombre">Nombre</label>
-                    <input [(ngModel)]="nombreFiltro" placeholder="Nombre" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
-                </div>
-                <div class="field col md:col-6">
-                    <label for="apellido">Apellido</label>
-                    <input [(ngModel)]="apellidoFiltro" placeholder="Apellido" ype="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" /> 
+        <div class="p-card p-shadow-2 p-p-4 w-full md:w-8 lg:w-12">
+            <div>
+                <h5 class="pl-3">Filtro</h5>
+                <div class="px-3">
+                    <div class="formgrid grid">
+                        <div class="field col md:col-6">
+                            <label for="nombre">Nombre</label>
+                            <input [(ngModel)]="nombreFiltro" placeholder="Nombre" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                        </div>
+                        <div class="field col md:col-6">
+                            <label for="apellido">Apellido</label>
+                            <input [(ngModel)]="apellidoFiltro" placeholder="Apellido" ype="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" /> 
+                        </div>
+                        
+                        <button class="py-3" pButton (click)="filtrarPrendasEntregadas()">Buscar</button>
+            
+                    </div>
                 </div>
                 
-                <button class="py-3" pButton (click)="filtrarPrendasEntregadas()">Buscar</button>
-    
+                
             </div>
-        </div>
-        
-        
+           </div> 
     </div>
-   </div> 
+
+    <div class="mb-3">
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-left" 
+            (onClick)="prev()" 
+            [disabled]="isFirstPage()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button"
+            icon="pi pi-refresh" 
+            (onClick)="reset()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-right" 
+            (onClick)="next()" 
+            [disabled]="isLastPage()" 
+            styleClass="p-button-text" />
+    </div>
+    <div class="card">
+        <p-table
+            [value]="prendaEntregada"
+            [paginator]="true"
+            [rows]="5"
+            [first]="first"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            (onPage)="pageChange($event)"
+            [rowsPerPageOptions]="[10, 25, 50]"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:25%">Nombre</th>
+                    <th style="width:25%">Apellido</th>
+                    <th style="width:25%">Pedido Id</th>
+                    <th style="width:25%">Fecha de Pedido</th>
+                    <th style="width:25%">Prenda</th>
+                    <th style="width:25%">Fecha de Entrega</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-prendaEntregada>
+                <tr>
+                    <td>{{ prendaEntregada.nombre }}</td>
+                    <td>{{ prendaEntregada.apellido }}</td>
+                    <td>{{ prendaEntregada.id }}</td>
+                    <td>{{ prendaEntregada.fechaPedido }}</td>
+                    <td>{{ prendaEntregada.nombrePrenda }}</td>
+                    <td>{{ prendaEntregada.fechaEntrega }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />
+            </ng-template>
+        </p-table>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
